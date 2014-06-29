@@ -185,12 +185,14 @@
         // 在中间显示:再向左偏移，再向下偏移
         [toast setGravity:iToastGravityCenter offsetLeft:60 offsetTop:80];
 //        toast.iToastTypeError;
-        // 0是黑色，红色：0到1之间
+        //显示itoast背景颜色： 0是黑色，红色：0到1之间
         [toast setBgRed:0.6];
-        // 0是黑色，蓝色：0到1之间
+        //显示itoast背景颜色： 0是黑色，蓝色：0到1之间
         [toast setBgBlue:0.8];
-        // 0是黑色，绿色：0到1之间
+        //显示itoast背景颜色： 0是黑色，绿色：0到1之间
         [toast setBgGreen:0.7];
+        // 设置显示字体颜色：蓝色
+        [toast setFontColor:[UIColor blueColor]];
         
         
         [toast show];

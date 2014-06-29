@@ -71,13 +71,15 @@ static iToastSettings *sharedSettings = nil;
 	UIImage *image = [theSettings.images valueForKey:[NSString stringWithFormat:@"%i", type]];
 	
 	UIFont *font = [UIFont systemFontOfSize:theSettings.fontSize];
+    UIColor *color = theSettings.fontColor; // [UIColor whiteColor]
     // 下面的方法在iOS7.0后就过期了
 //	CGSize textSize = [text sizeWithFont:font constrainedToSize:CGSizeMake(280, 60)];
 	CGSize textSize = [text boundingRectWithSize:CGSizeMake(280,60) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil].size;
 	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, textSize.width + kComponentPadding, textSize.height + kComponentPadding)];
 	label.backgroundColor = [UIColor clearColor];
     // 字体颜色：白色
-	label.textColor = [UIColor whiteColor];
+//	label.textColor = [UIColor whiteColor];
+    label.textColor = color;
 	label.font = font;
 	label.text = text;
 	label.numberOfLines = 0;
@@ -336,6 +338,12 @@ static iToastSettings *sharedSettings = nil;
 	return self;
 }
 
+// 设置字体颜色：默认是白色
+- (iToast *) setFontColor:(UIColor *) fontColor{
+	[self theSettings].fontColor = fontColor;
+	return self;
+}
+
 - (iToast *) setUseShadow:(BOOL) useShadow{
 	[self theSettings].useShadow = useShadow;
 	return self;
@@ -379,34 +387,21 @@ static iToastSettings *sharedSettings = nil;
 
 
 @implementation iToastSettings
-@synthesize offsetLeft;
-@synthesize offsetTop;
-@synthesize duration;
-@synthesize gravity;
-@synthesize postition;
-@synthesize fontSize;
-@synthesize useShadow;
-@synthesize cornerRadius;
-@synthesize bgRed;
-@synthesize bgGreen;
-@synthesize bgBlue;
-@synthesize bgAlpha;
-@synthesize images;
-@synthesize imageLocation;
 
+ 
 - (void) setImage:(UIImage *) img withLocation:(iToastImageLocation)location forType:(iToastType) type {
 	if (type == iToastTypeNone) {
 		// This should not be used, internal use only (to force no image)
 		return;
 	}
 	
-	if (!images) {
-		images = [[NSMutableDictionary alloc] initWithCapacity:4];
+	if (!_images) {
+		_images = [[NSMutableDictionary alloc] initWithCapacity:4];
 	}
 	
 	if (img) {
 		NSString *key = [NSString stringWithFormat:@"%i", type];
-		[images setValue:img forKey:key];
+		[_images setValue:img forKey:key];
 	}
     
     [self setImageLocation:location];
@@ -423,6 +418,7 @@ static iToastSettings *sharedSettings = nil;
 		sharedSettings.gravity = iToastGravityCenter;
 		sharedSettings.duration = iToastDurationShort;
 		sharedSettings.fontSize = 16.0;
+        sharedSettings.fontColor = [UIColor whiteColor]; // 默认是白色
 		sharedSettings.useShadow = YES;
 		sharedSettings.cornerRadius = 5.0;
 		sharedSettings.bgRed = 0;
@@ -443,6 +439,7 @@ static iToastSettings *sharedSettings = nil;
 	copy.duration = self.duration;
 	copy.postition = self.postition;
 	copy.fontSize = self.fontSize;
+    copy.fontColor = self.fontColor;
 	copy.useShadow = self.useShadow;
 	copy.cornerRadius = self.cornerRadius;
 	copy.bgRed = self.bgRed;
@@ -455,10 +452,10 @@ static iToastSettings *sharedSettings = nil;
 	NSArray *keys = [self.images allKeys];
 	
 	for (NSString *key in keys){
-		[copy setImage:[images valueForKey:key] forType:[key intValue]];
+		[copy setImage:[_images valueForKey:key] forType:[key intValue]];
 	}
     
-    [copy setImageLocation:imageLocation];
+    [copy setImageLocation:_imageLocation];
 	
 	return copy;
 }

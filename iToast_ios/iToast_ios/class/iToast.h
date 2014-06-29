@@ -73,7 +73,7 @@ typedef enum {
 			 offsetTop:(NSInteger) top;
 - (iToast *) setGravity:(iToastGravity) gravity;
 - (iToast *) setPostion:(CGPoint) position;
-- (iToast *) setFontSize:(CGFloat) fontSize;
+- (iToast *) setFontSize:(CGFloat) fontSize; // 设置字体大小
 - (iToast *) setUseShadow:(BOOL) useShadow;
 - (iToast *) setCornerRadius:(CGFloat) cornerRadius;
 - (iToast *) setBgRed:(CGFloat) bgRed;
@@ -85,6 +85,8 @@ typedef enum {
 
 // 添加初始化方法：
 - (id) initWithText:(NSString *) tex;
+// 设置字体颜色：默认是白色
+- (iToast *) setFontColor:(UIColor *) fontColor;
 
 -(iToastSettings *) theSettings;
 
@@ -93,23 +95,7 @@ typedef enum {
 
 
 @interface iToastSettings : NSObject<NSCopying>{
-	NSInteger duration;
-	iToastGravity gravity;
-	CGPoint postition;
-	iToastType toastType;
-	CGFloat fontSize;
-	BOOL useShadow;
-	CGFloat cornerRadius;
-	CGFloat bgRed;
-	CGFloat bgGreen;
-	CGFloat bgBlue;
-	CGFloat bgAlpha;
-	NSInteger offsetLeft;
-	NSInteger offsetTop;
-
-	NSDictionary *images;
-	
-	BOOL positionIsSet;
+   
 }
 
 
@@ -117,6 +103,7 @@ typedef enum {
 @property(assign) iToastGravity gravity;
 @property(assign) CGPoint postition;
 @property(assign) CGFloat fontSize;
+@property(nonatomic, strong) UIColor *fontColor; // 字体颜色
 @property(assign) BOOL useShadow;
 @property(assign) CGFloat cornerRadius;
 @property(assign) CGFloat bgRed;
