@@ -394,6 +394,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iToast_ios/iToast_ios-Prefix.pch";
 				INFOPLIST_FILE = "iToast_ios/iToast_ios-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -407,6 +408,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iToast_ios/iToast_ios-Prefix.pch";
 				INFOPLIST_FILE = "iToast_ios/iToast_ios-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -471,6 +473,7 @@
 				0FB232311959CAFA007CF501 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0FB232321959CAFA007CF501 /* Build configuration list for PBXNativeTarget "iToast_iosTests" */ = {
 			isa = XCConfigurationList;
@@ -479,6 +482,7 @@
 				0FB232341959CAFA007CF501 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

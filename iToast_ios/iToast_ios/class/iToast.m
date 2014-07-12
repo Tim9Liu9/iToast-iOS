@@ -24,6 +24,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+Copyright (c) 2014年 timliu: 9925124@qq.com . All rights reserved.
 */
 
 
@@ -32,20 +33,28 @@ THE SOFTWARE.
 
 #define CURRENT_TOAST_TAG 6984678
 
+#define IOS7_OR_LATER	( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
+
 static const CGFloat kComponentPadding = 5;
 
 static iToastSettings *sharedSettings = nil;
 
-@interface iToast(private)
+@interface iToast(private){
+    
+    
+}
 
 - (iToast *) settings;
 - (CGRect)_toastFrameForImageSize:(CGSize)imageSize withLocation:(iToastImageLocation)location andTextSize:(CGSize)textSize;
 - (CGRect)_frameForImage:(iToastType)type inToastFrame:(CGRect)toastFrame;
 
+
+
 @end
 
 
 @implementation iToast
+
 
 
 - (id) initWithText:(NSString *) tex{
@@ -72,9 +81,18 @@ static iToastSettings *sharedSettings = nil;
 	
 	UIFont *font = [UIFont systemFontOfSize:theSettings.fontSize];
     UIColor *color = theSettings.fontColor; // [UIColor whiteColor]
+    
+    CGSize textSize;
     // 下面的方法在iOS7.0后就过期了
+    if(IOS7_OR_LATER)
+    {
+        textSize = [text boundingRectWithSize:CGSizeMake(280,60) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil].size;
+    }else
+    {
+        textSize = [text sizeWithFont:font constrainedToSize:CGSizeMake(280, 60)];
+    }
 //	CGSize textSize = [text sizeWithFont:font constrainedToSize:CGSizeMake(280, 60)];
-	CGSize textSize = [text boundingRectWithSize:CGSizeMake(280,60) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil].size;
+//	CGSize textSize = [text boundingRectWithSize:CGSizeMake(280,60) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil].size;
 	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, textSize.width + kComponentPadding, textSize.height + kComponentPadding)];
 	label.backgroundColor = [UIColor clearColor];
     // 字体颜色：白色
