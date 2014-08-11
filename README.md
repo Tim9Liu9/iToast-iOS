@@ -154,7 +154,9 @@ Showing your appreciation
 =========================
 A few people already requested it, so now it's here: a Flattr button.
 
-[![Flattr this][2]][1]
+[![Flattr this][2]][1] 
 
 [1]: http://flattr.com/thing/852846/toast-notifications-ios
 [2]: http://api.flattr.com/button/button-static-50x60.png 
+
+end.
